@@ -8,6 +8,9 @@
       "sslPort": 44306
     }
   },
+  "environmentVariables": {
+    "ASPNETCORE_ENVIRONMENT": "Development"
+  },
   "profiles": {
     "http": {
       "commandName": "Project",
