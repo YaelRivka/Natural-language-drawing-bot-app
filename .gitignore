@@ -1,0 +1,35 @@
+# === General ===
+node_modules/
+.env
+.DS_Store
+Thumbs.db
+*.log
+
+# === React ===
+client/node_modules/
+client/build/
+client/.env
+client/.DS_Store
+client/package-lock.json
+
+# === Visual Studio ===
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# === ASP.NET Core ===
+bin/
+obj/
+server/DrawingServer/bin/
+server/DrawingServer/obj/
+server/DrawingServer/appsettings.Development.json
+
+# === Others ===
+*.db
+*.sqlite
+*.sqlite3
+*.bak
+*.tmp
+*.swp
