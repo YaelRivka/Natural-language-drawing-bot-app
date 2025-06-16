@@ -9,11 +9,12 @@ const PromptInput: React.FC<PromptInputProps> = ({ onResult }) => {
     e.preventDefault();
     try {
       const data = await sendPrompt(prompt);
-      onResult(data);
+      onResult(data, prompt); // הוספנו גם את הפרומפט עצמו
     } catch (err) {
       console.error("Error fetching drawing commands", err);
     }
   };
+
 
   return (
     <form onSubmit={handleSubmit}>

@@ -5,11 +5,11 @@ namespace server.Data
 {
     public class AppDbContext : DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options)
-            : base(options)
-        {
-        }
+   
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-        public DbSet<Drawing> Drawings { get; set; } // гевод
+        public DbSet<Drawing> Drawings => Set<Drawing>();
+
     }
 }
+

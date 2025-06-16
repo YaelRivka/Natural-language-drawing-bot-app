@@ -1,38 +1,28 @@
 using Microsoft.AspNetCore.Mvc;
 using Server.Models;
 
-namespace Server.Controllers
+[ApiController]
+[Route("api/[controller]")]
+public class DrawingsController : ControllerBase
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class DrawingsController : ControllerBase
+    private static readonly List<DrawingData> _drawings = new();
+
+    [HttpPost]
+    public IActionResult SaveDrawing([FromBody] DrawingData data)
     {
-        private readonly ILogger<DrawingsController> _logger;
+        data.Id = _drawings.Count + 1;
+        data.CreatedAt = DateTime.UtcNow;
+        _drawings.Add(data);
+        return Ok(new { id = data.Id });
+    }
 
-        public DrawingsController(ILogger<DrawingsController> logger)
-        {
-            _logger = logger;
-        }
+    [HttpGet("{id}")]
+    public IActionResult GetDrawing(int id)
+    {
+        var drawing = _drawings.FirstOrDefault(d => d.Id == id);
+        if (drawing == null)
+            return NotFound();
 
-        // רשימה זמנית בזיכרון (לשלב ראשון)
-        private static readonly List<DrawingData> _drawings = new();
-
-        [HttpPost]
-        public IActionResult SaveDrawing([FromBody] DrawingData data)
-        {
-            data.Id = _drawings.Count + 1;
-            _drawings.Add(data);
-            return Ok(new { id = data.Id });
-        }
-
-        [HttpGet("{id}")]
-        public IActionResult GetDrawing(int id)
-        {
-            var drawing = _drawings.FirstOrDefault(d => d.Id == id);
-            if (drawing == null)
-                return NotFound();
-
-            return Ok(drawing);
-        }
+        return Ok(drawing);
     }
 }

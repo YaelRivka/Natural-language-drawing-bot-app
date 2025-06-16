@@ -1,5 +1,5 @@
 import { DrawingCommand } from "./DrawingCommand";
 
 export interface PromptInputProps {
-  onResult: (data: DrawingCommand[]) => void;
+  onResult: (data: DrawingCommand[],propmt:string) => void;
 }
