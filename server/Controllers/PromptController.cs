@@ -27,9 +27,16 @@ namespace Server.Controllers
             _geminiApiKey = _configuration["Gemini:ApiKey"] ?? throw new ArgumentNullException("Gemini:ApiKey not found in configuration.");
         }
 
-        [HttpPost()]
-        public async Task<ActionResult<List<DrawingCommand>>> GenerateDrawing([FromBody] string description)
+     
+        public class PromptRequest
         {
+            public string Prompt { get; set; }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<List<DrawingCommand>>> GenerateDrawing([FromBody] PromptRequest request)
+        {
+            var description = request.Prompt;
             if (string.IsNullOrWhiteSpace(description))
             {
                 return BadRequest("תיאור הציור אינו יכול להיות ריק.");

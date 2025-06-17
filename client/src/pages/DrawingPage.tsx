@@ -3,6 +3,7 @@ import PromptInput from "../components/PromptInput";
 import DrawingCanvas from "../components/DrawingCanvas";
 import { DrawingCommand } from "../models/DrawingCommand";
 import { loadDrawing, saveDrawing, getDrawing } from "../services/drawingService";
+import "./css/DrawingPage.css"
 const DrawingPage = () => {
     const [commands, setCommands] = useState<DrawingCommand[]>([]);
     const [prompt, setPrompt] = useState("");
@@ -12,9 +13,12 @@ const DrawingPage = () => {
     const [redoStack, setRedoStack] = useState<DrawingCommand[][]>([]);
 
     const handleResult = (result: DrawingCommand[], usedPrompt: string) => {
-        setHistory((prev) => [...prev, commands]); // שומר את המצב הנוכחי להיסטוריה
-        setRedoStack([]); // איפוס ה־Redo כי זו פעולה חדשה
-        setCommands(result);
+        setHistory((prev) => [...prev, commands]);
+
+        setRedoStack([]);
+
+        setCommands((prev) => [...prev, ...result]);
+
         setPrompt(usedPrompt);
     };
 
@@ -62,39 +66,44 @@ const DrawingPage = () => {
         setRedoStack(rest);
     };
 
-    const handleClear = () => {
+
+    const handleNewDrawing = () => {
         setHistory([...history, commands]);
         setCommands([]);
         setRedoStack([]);
-    };
+        
+    }
 
 
 
     return (
-        <div>
-            <div style={{ marginTop: "10px", gap: "10px", display: "flex" }}>
-
-                <div>
-                      <input
+        <div className="page-container">
+            <div className="controls">
+                <input
                     type="text"
                     value={drawingIdInput}
                     onChange={(e) => setDrawingIdInput(e.target.value)}
                     placeholder="מספר ציור לטעינה"
                 />
-                    <button onClick={handleLoad}>טען ציור</button>
-                </div>
+                <button onClick={handleLoad}>טען ציור</button>
                 <button onClick={handleSave}>שמור</button>
-                <button onClick={handleLoad}>טען</button>
                 <button onClick={handleUndo}>בטל</button>
                 <button onClick={handleRedo}>חזור</button>
-                <button onClick={handleClear}>נקה</button>
-            </div>
-            <h2>הצ'אט שלך עם הבוט</h2>
-            <PromptInput onResult={(data) => handleResult(data, prompt)} />
-            <DrawingCanvas commands={commands} />
-        </div>
+                <button onClick={handleNewDrawing}>ציור חדש</button>
 
+            </div>
+
+            <div className="main-content">
+                <div className="left-chat">
+                    <PromptInput onResult={(data) => handleResult(data, prompt)} />
+                </div>
+                <div className="right-canvas">
+                    <DrawingCanvas commands={commands} />
+                </div>
+            </div>
+        </div>
     );
+
 };
 
 export default DrawingPage;

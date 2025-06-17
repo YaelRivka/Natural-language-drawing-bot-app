@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { DrawingCommand } from "../models/DrawingCommand";
-
+import "./css/DrawingCanvas.css"
 interface DrawingCanvasProps {
   commands: DrawingCommand[];
 }

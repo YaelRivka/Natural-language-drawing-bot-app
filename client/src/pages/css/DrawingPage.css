@@ -1,0 +1,51 @@
+.page-container {
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #f0f4f8, #dfe9f3);
+  min-height: 100vh;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.controls input {
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.controls button {
+  padding: 8px 14px;
+  background-color: #007acc;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.controls button:hover {
+  background-color: #005ea3;
+}
+
+.main-content {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.left-chat {
+  flex: 1;
+  max-width: 35%;
+}
+
+.right-canvas {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
