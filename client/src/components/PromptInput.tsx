@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { sendPrompt } from "../services/promptService";
 import { DrawingCommand } from "../models/DrawingCommand";
 import "./css/PromptInput.css";
@@ -7,9 +7,23 @@ interface Message {
   text: string;
 }
 
-const PromptInput: React.FC<{ onResult: (commands: DrawingCommand[]) => void }> = ({ onResult }) => {
+const PromptInput: React.FC<{
+  onResult: (commands: DrawingCommand[]) => void;
+  resetSignal: boolean;
+  currentCommands: DrawingCommand[];
+  onResetComplete: () => void;
+}> = ({ onResult, resetSignal, onResetComplete,currentCommands }) => {
   const [prompt, setPrompt] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
+
+  useEffect(() => {
+    if (resetSignal) {
+      setMessages([]);  // נקה את ההודעות
+      setPrompt("");    // נקה את שורת הקלט
+      onResetComplete(); // עדכן להורה שסיימנו לנקות
+    }
+  }, [resetSignal]);
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,7 +34,7 @@ const PromptInput: React.FC<{ onResult: (commands: DrawingCommand[]) => void }> 
     setMessages((prev) => [...prev, userMessage]);
 
     try {
-      const result = await sendPrompt(prompt);
+const result = await sendPrompt(prompt, currentCommands);
 
       const botMessage: Message = {
         sender: "bot",
