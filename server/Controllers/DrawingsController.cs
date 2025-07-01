@@ -19,7 +19,6 @@ public class DrawingsController : ControllerBase
     public async Task<IActionResult> SaveDrawing([FromBody] Drawing data)
     {
         data.CreatedAt = DateTime.UtcNow;
-
         _context.Drawings.Add(data);
         await _context.SaveChangesAsync();
 

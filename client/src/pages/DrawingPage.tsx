@@ -21,7 +21,7 @@ const DrawingPage = ({ userId ,onLogout }: DrawingPageProps) => {
     const [drawingId, setDrawingId] = useState<number | null>(null);
     const [history, setHistory] = useState<DrawingCommand[][]>([]);
     const [redoStack, setRedoStack] = useState<DrawingCommand[][]>([]);
-    const [resetChat, setResetChat] = useState(false); // חדש
+    const [resetChat, setResetChat] = useState(false);
     const [userDrawings, setUserDrawings] = useState<DrawingSummary[]>([]);
     const [selectedDrawingId, setSelectedDrawingId] = useState<number | null>(null);
     useEffect(() => {
@@ -49,7 +49,7 @@ const DrawingPage = ({ userId ,onLogout }: DrawingPageProps) => {
 
     const handleSave = async () => {
         const data: Drawing = {
-            title: prompt, // או תני שם אחר אם את רוצה
+            title: prompt, 
             userId: userId,
             commandsJson: JSON.stringify(commands)
         };
@@ -124,7 +124,6 @@ const DrawingPage = ({ userId ,onLogout }: DrawingPageProps) => {
                     טען ציור
                 </button>
 
-                {/* <button onClick={handleLoad}>טען ציור</button> */}
                 <button onClick={handleSave}>שמור</button>
                 <button onClick={handleUndo}>בטל</button>
                 <button onClick={handleRedo}>חזור</button>

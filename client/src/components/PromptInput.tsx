@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { sendPrompt } from "../services/promptService";
 import { DrawingCommand } from "../models/DrawingCommand";
 import "./css/PromptInput.css";
@@ -12,7 +12,7 @@ const PromptInput: React.FC<{
   resetSignal: boolean;
   currentCommands: DrawingCommand[];
   onResetComplete: () => void;
-}> = ({ onResult, resetSignal, onResetComplete,currentCommands }) => {
+     }> = ({ onResult, resetSignal, onResetComplete, currentCommands }) => {
   const [prompt, setPrompt] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
 
@@ -34,7 +34,7 @@ const PromptInput: React.FC<{
     setMessages((prev) => [...prev, userMessage]);
 
     try {
-const result = await sendPrompt(prompt, currentCommands);
+      const result = await sendPrompt(prompt, currentCommands);
 
       const botMessage: Message = {
         sender: "bot",
