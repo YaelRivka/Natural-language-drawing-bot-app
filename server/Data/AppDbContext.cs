@@ -18,7 +18,7 @@ namespace server.Data
                 .HasOne<User>() 
                 .WithMany()     
                 .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.Cascade); // או Restrict אם לא רוצים מחיקה אוטומטית
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

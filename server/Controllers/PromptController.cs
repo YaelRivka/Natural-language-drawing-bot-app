@@ -18,7 +18,7 @@ namespace Server.Controllers
         private readonly IConfiguration _configuration;
         private readonly string _geminiApiKey;
 
-        private const string GeminiBaseUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
+        private const string GeminiBaseUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
 
         public PromptController(HttpClient httpClient, IConfiguration configuration)
         {

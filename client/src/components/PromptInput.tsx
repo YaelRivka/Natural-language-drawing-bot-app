@@ -18,9 +18,9 @@ const PromptInput: React.FC<{
 
   useEffect(() => {
     if (resetSignal) {
-      setMessages([]);  // נקה את ההודעות
-      setPrompt("");    // נקה את שורת הקלט
-      onResetComplete(); // עדכן להורה שסיימנו לנקות
+      setMessages([]);  
+      setPrompt("");    
+      onResetComplete(); 
     }
   }, [resetSignal]);
 
